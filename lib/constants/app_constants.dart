@@ -1,5 +1,5 @@
 class AppConst {
-  static const apiKey = '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';
+  static const apiKey = '';
   static const String appName = 'ZenX GPT';
   static const String appBarChatBot = 'ZenX GPT 🔥';
   static const String appBarImage = 'Image Creator 📸';
