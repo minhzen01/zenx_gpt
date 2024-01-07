@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:zenx_chatbot/apis/app_write.dart';
 import 'package:zenx_chatbot/bloc/ai_image/ai_image_bloc.dart';
 import 'package:zenx_chatbot/bloc/chatbot/chatbot_bloc.dart';
 import 'package:zenx_chatbot/bloc/translate/translate_bloc.dart';
@@ -17,6 +18,7 @@ import 'utils/app_utils/app_utils.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HiveDB.initialize();
+  AppWrite.init();
   await AppUtils.systemUIModeFullScreen();
   AppUtils.systemUIOverlayTrans();
   SystemChrome.setPreferredOrientations(

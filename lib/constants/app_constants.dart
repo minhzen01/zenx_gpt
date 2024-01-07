@@ -1,5 +1,9 @@
 class AppConst {
-  static const apiKey = '';
+  static String apiKey = 'apiKey';
+  static const apiKeyData = 'apiKey';
+  static const collectionId = 'ApiKey';
+  static const databaseId = 'MyDatabase';
+  static const documentId = 'chatGptKey';
   static const String appName = 'ZenX GPT';
   static const String appBarChatBot = 'ZenX GPT 🔥';
   static const String appBarImage = 'Image Creator 📸';

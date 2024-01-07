@@ -48,6 +48,9 @@ dependencies:
   flutter_speed_dial: ^7.0.0
   # Storage Chat Bot Messages.
   realm: ^1.6.1
+  # App Write DB (Storage API Key).
+  appwrite:
+    path: ./appwrite
 
 
 dev_dependencies:
