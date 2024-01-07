@@ -12,6 +12,7 @@ enum Status { none, loading, success }
 class AiImageBloc extends Bloc<AiImageEvent, AiImageState> {
   AiImageBloc() : super(AiImageInitial()) {
     on<AiImageEventCreateImage>(_aiImageEventCreateImage);
+    on<AiImageEventShowDialogSuccess>(_aiImageEventShowDialogSuccess);
   }
 
   /// Generate Image.
@@ -34,9 +35,7 @@ class AiImageBloc extends Bloc<AiImageEvent, AiImageState> {
           url: image.data[0].url.toString(),
           title: event.description,
         ));
-
-        await Future.delayed(const Duration(milliseconds: 2500));
-        MyDialog.success(AppConst.successTitle, AppConst.successSub);
+        // MyDialog.success(AppConst.successTitle, AppConst.successSub);
       } else {
         // Failure.
         MyDialog.failure(AppConst.failureTitle, AppConst.failureSub);
@@ -48,5 +47,9 @@ class AiImageBloc extends Bloc<AiImageEvent, AiImageState> {
 
       emit(AiImageCreateImageFailure());
     }
+  }
+
+  FutureOr<void> _aiImageEventShowDialogSuccess(AiImageEventShowDialogSuccess event, Emitter<AiImageState> emit) {
+    emit(AiImageShowDialogSuccess());
   }
 }

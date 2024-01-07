@@ -2,11 +2,12 @@
 abstract class AiImageState {}
 
 /// Listener.
-abstract class AiImageActionState {}
+abstract class AiImageActionState extends AiImageState {}
 
 /// Initial.
 class AiImageInitial extends AiImageState {}
 
+/// Loading.
 class AiImageWaiting extends AiImageState {}
 
 /// Create Image Success.
@@ -19,3 +20,6 @@ class AiImageCreateImageSuccess extends AiImageState {
 
 /// Create Image Failure.
 class AiImageCreateImageFailure extends AiImageState {}
+
+/// ShowDialogSuccess.
+class AiImageShowDialogSuccess extends AiImageActionState {}

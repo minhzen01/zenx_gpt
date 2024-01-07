@@ -29,7 +29,11 @@ class ImageFeature extends StatelessWidget {
     final TextEditingController controller = TextEditingController();
     return BlocConsumer<AiImageBloc, AiImageState>(
       listenWhen: (previous, current) => current is AiImageActionState,
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is AiImageShowDialogSuccess) {
+          MyDialog.success(AppConst.successTitle, AppConst.successSub);
+        }
+      },
       buildWhen: (previous, current) => current is! AiImageActionState,
       builder: (context, state) {
         return Scaffold(
@@ -159,40 +163,40 @@ class ImageFeature extends StatelessWidget {
           ),
           floatingActionButton: state is AiImageCreateImageSuccess
               ? Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SpeedDial(
-                    animatedIcon: AnimatedIcons.menu_close,
-                    backgroundColor: AppColors.floatingActionButtonBg,
-                    overlayColor: AppColors.darkBg,
-                    overlayOpacity: .4,
-                    spacing: 4,
-                    spaceBetweenChildren: 4,
-                    children: [
-                      SpeedDialChild(
-                        backgroundColor: AppColors.lightBg,
-                        onTap: () {
-                          _shareImage(state.url);
-                        },
-                        child: const Icon(
-                          Icons.share,
-                          color: AppColors.darkBg,
-                        ),
-                        elevation: 0,
-                      ),
-                      SpeedDialChild(
-                        backgroundColor: AppColors.lightBg,
-                        onTap: () {
-                          _saveNetworkImage(state.url);
-                        },
-                        child: const Icon(
-                          Icons.download,
-                          color: AppColors.darkBg,
-                        ),
-                        elevation: 0,
-                      ),
-                    ],
+            padding: const EdgeInsets.all(8.0),
+            child: SpeedDial(
+              animatedIcon: AnimatedIcons.menu_close,
+              backgroundColor: AppColors.floatingActionButtonBg,
+              overlayColor: AppColors.darkBg,
+              overlayOpacity: .4,
+              spacing: 4,
+              spaceBetweenChildren: 4,
+              children: [
+                SpeedDialChild(
+                  backgroundColor: AppColors.lightBg,
+                  onTap: () {
+                    _shareImage(state.url);
+                  },
+                  child: const Icon(
+                    Icons.share,
+                    color: AppColors.darkBg,
                   ),
-                )
+                  elevation: 0,
+                ),
+                SpeedDialChild(
+                  backgroundColor: AppColors.lightBg,
+                  onTap: () {
+                    _saveNetworkImage(state.url);
+                  },
+                  child: const Icon(
+                    Icons.download,
+                    color: AppColors.darkBg,
+                  ),
+                  elevation: 0,
+                ),
+              ],
+            ),
+          )
               : const SizedBox(),
         );
       },
@@ -204,8 +208,14 @@ class ImageFeature extends StatelessWidget {
       return ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: CachedNetworkImage(
+          progressIndicatorBuilder: (context, url, downloadProgress) {
+            if (downloadProgress.progress == 1) {
+              context.read<AiImageBloc>().add(AiImageEventShowDialogSuccess());
+            }
+            return const LoadingCustom();
+          },
           imageUrl: url,
-          placeholder: (context, url) => const LoadingCustom(),
+          // placeholder: (context, url) => const LoadingCustom(),
           errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
       );

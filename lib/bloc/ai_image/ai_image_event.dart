@@ -17,3 +17,6 @@ class AiImageEventCreateImage extends AiImageEvent {
   @override
   List<Object?> get props => [description];
 }
+
+/// Show dialog success.
+class AiImageEventShowDialogSuccess extends AiImageEvent {}
