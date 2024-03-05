@@ -27,9 +27,10 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final c = _controller.text.trim();
-    List<String> fullList = List.from(TranslateConst.languageList);
-    if (widget.title == AppConst.translateFrom) {
-      fullList.insert(0, AppConst.fromLanguageDefault);
+    List<String> fullList = List.of(TranslateConst.languageList.keys.toList());
+    if (widget.title != AppConst.translateFrom) {
+      // fullList.insert(0, AppConst.fromLanguageDefault);
+      fullList.removeWhere((e) => e == AppConst.fromLanguageDefault);
     }
     final List<String> list = c.isEmpty ? fullList : fullList.where((e) => e.toLowerCase().contains(searchValue)).toList();
 

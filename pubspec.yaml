@@ -51,6 +51,8 @@ dependencies:
   # App Write DB (Storage API Key).
   appwrite:
     path: ./appwrite
+  # Google Translate.
+  translator_plus: ^1.0.1
 
 
 dev_dependencies:

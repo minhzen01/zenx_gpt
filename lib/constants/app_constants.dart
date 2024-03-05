@@ -19,7 +19,7 @@ class AppConst {
   static const String finishButton = 'Finish';
   static const String downloadImage = 'Download Image';
   static const String translateButton = 'Translate';
-  static const String fromLanguageDefault = 'Auto';
+  static const String fromLanguageDefault = 'Automatic';
   static const String toLanguageDefault = 'Vietnamese';
   static const String allLanguages = "ALL LANGUAGES";
 
